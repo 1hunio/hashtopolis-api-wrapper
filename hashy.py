@@ -75,8 +75,10 @@ def arguments(argv=None):
     return args
 
 def main():
+    print("Checking for expired/errored tasks...")
     checkExpired()
     checkErrors()
+    print()
 
     args = arguments(sys.argv[1:])      # read in arguments
     if args.create:
@@ -128,6 +130,7 @@ Is that okay? (y/n): """)
         else:
             print("Invalid input.")
             continue
+    print()
 
     # select hashlist
     hashlists = client.hashlist("listHashlists").get("hashlists",[])
@@ -186,7 +189,8 @@ Is that okay? (y/n): """)
 
     # set priority
     priority = int(input("Set task priority: "))
-    
+    print()
+
     # set max agents - list how many total
     maxagents = 0
     agents = client.agent("listAgents").get("agents", [])
@@ -223,6 +227,7 @@ Is that okay? (y/n): """)
     }
 
     taskid = client.task("createTask", data).get("taskId", [])
+    print()
     print(f"Task created! Task ID: {taskid}")
     checkErrors(taskid)
 
