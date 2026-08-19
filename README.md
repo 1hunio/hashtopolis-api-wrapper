@@ -1,4 +1,4 @@
-# Hashtopolis API Wrapper + Added Functionality
+## Hashtopolis API Wrapper + Added Functionality
 
 Hashtopolis natively lacks task expiration, error handling notifications (within the UI), and automatically unassigning agents to cracking tasks when expired/failed. This is a little API wrapper to unofficially add that functionality!
 
