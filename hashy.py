@@ -46,10 +46,10 @@ class HashtopolisClient:
         self.cracker = HashtopolisSection(self, "cracker")
         self.config = HashtopolisSection(self, "config")
 
-host = "http://localhost:8080"                  # change this - run on hashtopolis server
+load_dotenv()
+host = os.getenv("HASHTOPOLIS_HOST")            # run on hashtopolis server
 endpoint = "/api/user.php"                      # user-api endpoint
 api_url = f"{host + endpoint}"
-load_dotenv()
 api_key = os.getenv("HASHTOPOLIS_API_KEY")
 client = HashtopolisClient(api_url, api_key)
 discord_key = os.getenv("DISCORD_API_KEY")
@@ -75,12 +75,13 @@ def arguments(argv=None):
     return args
 
 def main():
+    args = arguments(sys.argv[1:])      # read in arguments
+
     print("Checking for expired/errored tasks...")
     checkExpired()
     checkErrors()
     print()
 
-    args = arguments(sys.argv[1:])      # read in arguments
     if args.create:
         createTask()
     elif args.list:
